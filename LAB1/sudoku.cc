@@ -7,9 +7,9 @@
 #include <unistd.h>
 #include <sys/time.h>
 
-
+//int c[1000000];
+//int *p=c;
 #include "sudoku.h"
-
 int64_t now()
 {
   struct timeval tv;
@@ -23,12 +23,12 @@ FILE* fp;
 
 void* threadfunc(void *num)
 {
-        printf("%d num\n",num);
+        //printf("%d num\n",num);
 	char puzzle[128];
 	bool flag=true;
 	while(flag)
 	{
-                printf("%d\n",flag);
+               // printf("%d\n",flag);
 		pthread_mutex_lock(&lock);
 		if(fgets(puzzle,sizeof puzzle,fp)!=NULL)
 		{
@@ -40,10 +40,10 @@ void* threadfunc(void *num)
 			if(solve_sudoku_dancing_links(0))
 			{
 				if(!solve_sudoku_dancing_links(0)) assert(0);
-				printf("success\n");
+				//printf("success\n");
 			}
 			else
-			printf("fail\n");
+			//printf("fail\n");
 			flag=true;
 		}
 		else
@@ -106,7 +106,11 @@ int main(int argc, char* argv[])
   double sec = (end-start)/1000000.0;
   //printf("%f sec %f ms each %d\n", sec, 1000*sec/total, total_solved);
   printf("%f sec ", sec);
+    //for(int i = 0; i < 1000; i++){
+    //for(int j = 0; j < 81; j++){
+      //printf("%d", [i*81 + j]);
+    //}
+    //printf("\n");
+ // }
   return 0;
 }
-
-
